@@ -18,7 +18,7 @@
 
 /* Custom CSS classes */
 .custom-shadow {
-  box-shadow: 0px 20px 40px 0px var(--color-shadow);
+  box-shadow: 0px 40px 20px 0px var(--color-shadow);
 }
 
 .custom-shadow-2 {
@@ -26,7 +26,6 @@
 }
 
 /* App classes */
-
 .food-badge {
   @apply text-white absolute flex items-center gap-2 font-bold bg-primary z-10 p-2 px-3 top-4 left-4 rounded-md;
 }
@@ -45,6 +44,10 @@
 
 .food-button {
   @apply cursor-pointer bg-linear-to-r from-[#FF7A7A] to-120% to-primary text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
+}
+
+.food-secondary-button {
+  @apply cursor-pointer bg-linear-to-r py-3 from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
 }
 
 /* Reponsive fonts */
