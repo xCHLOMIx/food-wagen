@@ -5,7 +5,7 @@ import plate from "@/public/image.png"
 export default function Home() {
   return (
     <main className="">
-      <section className="bg-secondary overflow-hidden max-xl:pt-48 max-xl:px-6 min-h-[494px] px-4 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40">
+      <section id="food-hero-section" className="food-hero-section">
         <div className="xl:col-span-3 flex flex-col max-xl:text-center">
           <div className="text-white mb-6">
             <h3 className="font-bold x7l">Are you starving?</h3>
@@ -19,6 +19,7 @@ export default function Home() {
             <Image src={plate} height={plate.height} width={plate.width} className="h-auto relative z-20 w-full" alt="An image of a plate with a good meal" />
         </div>
       </section>
+      <section id=""></section>
     </main>
   );
 }

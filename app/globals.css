@@ -14,12 +14,19 @@
   font-family: var(--font-source-sans);
 }
 
+/* Custom CSS classes */
 .custom-shadow {
   box-shadow: 0px 20px 40px 0px var(--color-shadow);
 }
 
 .custom-shadow-2 {
   box-shadow: 0px 5px 10px 0px var(--color-shadow-2);
+}
+
+/* App classes */
+
+.food-hero-section {
+  @apply bg-secondary overflow-hidden max-xl:pt-48 max-xl:px-6 min-h-[494px] px-4 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40;
 }
 
 .food-navbar {
