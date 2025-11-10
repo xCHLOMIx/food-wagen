@@ -19,7 +19,7 @@ const SearchForm = () => {
                 </div>
                 <Button type='submit'>
                     <FaSearch className='size-3'/>
-                    <span className='text-sm'>Find meal</span>
+                    <span className='text-sm max-md:hidden'>Find meal</span>
                 </Button>
             </div>
         </Form>

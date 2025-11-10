@@ -29,3 +29,9 @@
 .food-nav-btn {
   @apply text-base font-semibold cursor-pointer text-white bg-linear-to-r from-[#FFBA26] to-[#FF9A0E] py-1 px-7 rounded-xl;
 }
+
+/* Reponsive fonts */
+
+.x7l {
+  @apply text-7xl max-lg:text-6xl max-md:text-5xl max-sm:text-4xl;
+}
