@@ -2,12 +2,14 @@
 
 @theme {
   --color-primary: #F17228;
+  --color-custom-green: #79B93C;
   --color-secondary: #FFB30E;
   --color-shadow: #FFAE004A;
   --color-shadow-2: #FFAE0042;
   --color-muted: #757575;
   --color-border: #EEEEEE;
   --color-bg-muted: #F5F5F5;
+  --color-foreground: #424242;
 }
 
 * {
@@ -25,8 +27,12 @@
 
 /* App classes */
 
+.food-badge {
+  @apply text-white absolute flex items-center gap-2 font-bold bg-primary z-10 p-2 px-3 top-4 left-4 rounded-md;
+}
+
 .food-hero-section {
-  @apply bg-secondary overflow-hidden max-xl:pt-48 max-xl:px-6 min-h-[494px] px-4 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40;
+  @apply bg-secondary overflow-hidden max-xl:pt-48 min-h-[494px] px-6 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40;
 }
 
 .food-navbar {
@@ -37,8 +43,8 @@
   @apply text-base font-semibold cursor-pointer text-white bg-linear-to-r from-[#FFBA26] to-[#FF9A0E] py-1 px-7 rounded-xl;
 }
 
-.button {
-  @apply bg-linear-to-r from-[#FF7A7A] to-120% to-primary text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
+.food-button {
+  @apply cursor-pointer bg-linear-to-r from-[#FF7A7A] to-120% to-primary text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
 }
 
 /* Reponsive fonts */

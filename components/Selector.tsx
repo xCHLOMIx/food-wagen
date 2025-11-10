@@ -1,11 +1,5 @@
+import { SelectorProps } from '@/lib/types'
 import React from 'react'
-
-interface SelectorProps {
-    icon: any,
-    text: string,
-    active: boolean
-    handleClick: () => void
-}
 
 const Selector: React.FC<SelectorProps> = ({ text, icon, active, handleClick }) => {
     return (

@@ -1,14 +1,9 @@
+import { ButtonProps } from '@/lib/types'
 import React from 'react'
 
-interface ButtonProps {
-    children: React.ReactNode,
-    type?: "submit" | "button" | "reset",
-    styles?: string
-}
-
-const Button: React.FC<ButtonProps> = ({ children, type }) => {
+const Button: React.FC<ButtonProps> = ({ children, type, styles }) => {
     return (
-        <button type={type} className={`button`}>
+        <button type={type} className={`${styles} food-button`}>
             {children}
         </button>
     )
