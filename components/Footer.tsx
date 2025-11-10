@@ -20,7 +20,7 @@ const socials: SocialsInterface[] = [
 const Footer = () => {
     return (
         <footer className='bg-custom-black px-4 pt-12 flex flex-col lg:px-40 text-white'>
-            <div className='min-h-60 flex justify-between'>
+            <div className='min-h-60 flex max-lg:flex-col justify-between'>
                 <div className="grid grid-cols-3 gap-4">
                     {links.map((link) => (
                         <div key={link.title}>
@@ -33,7 +33,7 @@ const Footer = () => {
                         </div>
                     ))}
                 </div>
-                <div className='flex flex-col gap-7'>
+                <div className='flex max-lg:mt-10 flex-col gap-7'>
                     <h4 className='font-bold text-foreground-muted text-sm'>FOLLOW US</h4>
                     <div className='flex gap-2'>
                         {socials.map((social) => (
@@ -43,18 +43,18 @@ const Footer = () => {
                         ))}
                     </div>
                     <p className='font-bold text-foreground-muted'>Receive exclusive offers in your mailbox</p>
-                    <form action="" className='flex items-center gap-3'>
+                    <form action="" className='flex max-sm:flex-col items-center gap-3'>
                         <div className='bg-foreground w-80 gap-2 items-center flex px-3 rounded-lg'>
                             <MdEmail className='size-6 text-foreground-muted' />
                             <input type="email" className='py-3 outline-0' placeholder='Enter Your email' />
                         </div>
-                        <SecondaryButton styles='h-full px-4 text-sm rounded-lg'>
+                        <SecondaryButton styles='h-full max-sm:self-end max-sm:mr-3 py-3 px-4 text-sm rounded-lg'>
                             Subscribe
                         </SecondaryButton>
                     </form>
                 </div>
             </div>
-            <div className='py-2 border-t border-foreground'>
+            <div className='py-2 max-lg:mt-10 border-t border-foreground'>
                 <p className='text-sm flex items-center gap-2'>
                     <span className='font-light'>All rights Reserved</span>
                     <FaRegCopyright />
