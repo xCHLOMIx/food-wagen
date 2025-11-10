@@ -1,6 +1,7 @@
 import "@/app/globals.css"
 import Image from 'next/image'
 import logo from '@/public/logo-icon.png'
+import SecondaryButton from "./SecondaryButton"
 
 const Navbar = () => {
     return (
@@ -12,9 +13,9 @@ const Navbar = () => {
                     <span className='text-secondary'>Wagen</span>
                 </h2>
             </div>
-            <button className='food-nav-btn custom-shadow custom-shadow-2'>
+            <SecondaryButton styles='text-sm h-8'>
                 Add Meal
-            </button>
+            </SecondaryButton>
         </nav>
     )
 }

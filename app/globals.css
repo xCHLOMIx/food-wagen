@@ -12,16 +12,30 @@
   --color-foreground: #424242;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #F1722888;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+}
+
 * {
   font-family: var(--font-source-sans);
 }
 
 /* Custom CSS classes */
 .custom-shadow {
-  box-shadow: 0px 40px 20px 0px var(--color-shadow);
+  box-shadow: 0px 20px 40px 0px var(--color-shadow);
 }
 
-.custom-shadow-2 {
+.custom-shadow-2::after {
+  position: absolute;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
   box-shadow: 0px 5px 10px 0px var(--color-shadow-2);
 }
 
@@ -38,16 +52,12 @@
   @apply p-4 lg:px-40 bg-white flex items-center justify-between;
 }
 
-.food-nav-btn {
-  @apply text-base font-semibold cursor-pointer text-white bg-linear-to-r from-[#FFBA26] to-[#FF9A0E] py-1 px-7 rounded-xl;
-}
-
 .food-button {
   @apply cursor-pointer bg-linear-to-r from-[#FF7A7A] to-120% to-primary text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
 }
 
 .food-secondary-button {
-  @apply cursor-pointer bg-linear-to-r py-3 from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
+  @apply cursor-pointer relative overflow-hidden bg-linear-to-r from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max px-8 max-md:px-4 rounded-xl flex items-center gap-2;
 }
 
 /* Reponsive fonts */

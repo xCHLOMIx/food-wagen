@@ -29,9 +29,9 @@ const MealsList: React.FC = () => {
                     <MealCard meal={meal} key={meal.createdAt} />
                 ))}
             </div>
-            <SecondaryButton>
-                <span className="">Load More</span>
-                <PiCaretRightBold className="size-5" />
+            <SecondaryButton styles='h-12'>
+                <span className="">Load more</span>
+                <PiCaretRightBold strokeWidth={10} />
             </SecondaryButton>
         </>
     )
