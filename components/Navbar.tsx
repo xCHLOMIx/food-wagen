@@ -13,7 +13,7 @@ const Navbar = () => {
                     <span className='text-secondary'>Wagen</span>
                 </h2>
             </div>
-            <SecondaryButton styles='text-sm h-8'>
+            <SecondaryButton styles='text-sm h-8 rounded-xl'>
                 Add Meal
             </SecondaryButton>
         </nav>

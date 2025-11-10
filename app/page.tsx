@@ -2,8 +2,6 @@ import SearchForm from "@/components/SearchForm";
 import Image from "next/image";
 import plate from "@/public/image.png"
 import MealsList from "@/components/MealsList";
-import SecondaryButton from "@/components/SecondaryButton";
-import { PiCaretRightBold } from "react-icons/pi";
 
 export default async function Home() {
 

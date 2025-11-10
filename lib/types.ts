@@ -21,3 +21,13 @@ export interface MealInterface {
     Price: string,
     id: string
 }
+
+export interface LinkInterface {
+    title: string,
+    items: LinkItemInterface[]
+}
+
+export interface LinkItemInterface {
+    name: string,
+    href: string
+}

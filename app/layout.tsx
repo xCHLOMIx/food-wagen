@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Sans_3 } from "next/font/google";
+import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const source = Source_Sans_3({
   variable: "--font-source-sans",
@@ -30,6 +31,7 @@ export default function RootLayout({
           <Navbar />
         </header>
         {children}
+        <Footer />
       </body>
     </html>
   );

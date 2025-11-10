@@ -10,6 +10,9 @@
   --color-border: #EEEEEE;
   --color-bg-muted: #F5F5F5;
   --color-foreground: #424242;
+  --color-foreground-muted: #A0A0A0;
+  --color-custom-black: #212121;
+  --color-icon: #cacaca;
 }
 
 ::-webkit-scrollbar {
@@ -57,7 +60,7 @@
 }
 
 .food-secondary-button {
-  @apply cursor-pointer relative overflow-hidden bg-linear-to-r from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max px-8 max-md:px-4 rounded-xl flex items-center gap-2;
+  @apply cursor-pointer relative overflow-hidden bg-linear-to-r from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max flex items-center gap-2;
 }
 
 /* Reponsive fonts */
