@@ -1,11 +1,26 @@
 import { MealInterface } from '@/lib/types'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { FaStar, FaTag } from 'react-icons/fa'
 import { IoMdMore } from 'react-icons/io'
 
 const MealCard: React.FC<{ meal: MealInterface }> = ({ meal }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<any>(null)
+
+  useEffect(() => {
+    const handleClickedOutside = (event: Event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickedOutside)
+
+    return(() => {
+      removeEventListener("mousedown", handleClickedOutside)
+    })
+  }, [])
 
   return (
     <div className='w-full flex flex-col gap-6 items-start'>
@@ -31,7 +46,7 @@ const MealCard: React.FC<{ meal: MealInterface }> = ({ meal }) => {
           className='self-start place-self-end relative hover:bg-black/10 py-1 rounded-md cursor-pointer'
         >
           <IoMdMore className='size-6' />
-          <div className={`${isOpen ? "flex" : "hidden"} flex-col bg-white shadow rounded-xl p-2 mt-2 absolute z-40 right-0`}>
+          <div ref={dropdownRef} className={`${isOpen ? "flex" : "hidden"} flex-col bg-white shadow rounded-xl p-2 mt-2 absolute z-40 right-0`}>
             <div className='pl-2 pr-3 py-1 hover:bg-gray-100 transition duration-150 rounded-lg'>Edit</div>
             <div className='text-red-500 pl-2 pr-3 py-1 hover:bg-red-50 transition duration-150 rounded-lg'>Delete</div>
           </div>
