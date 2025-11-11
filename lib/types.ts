@@ -1,7 +1,9 @@
 export interface ButtonProps {
     children: React.ReactNode,
     type?: "submit" | "button" | "reset",
-    styles?: string
+    styles?: string,
+    loading?: boolean
+    handleClick?: any
 }
 
 export interface SelectorProps {

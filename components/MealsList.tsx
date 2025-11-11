@@ -15,18 +15,27 @@ const MealsList: React.FC = () => {
     const [meals, setMeals] = useState<MealInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
+    const fetchData = async () => {
+        setLoading(true)
+        const response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
+        const data = await response.json();
+
+        setMeals(data)
+        setLoading(false)
+    }
+
     useEffect(() => {
         setLoading(true)
-        const fetchData = async () => {
-            const response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
-            const data = await response.json();
-
-            setMeals(data)
-            setLoading(false)
-        }
 
         fetchData()
     }, [])
+
+    const handleDelete = (id: string) => {
+        const newMeals: any = meals.filter((meal) => meal.id !== id)
+        setMeals(newMeals)
+    }
+
+    console.log(meals.filter((meal) => meal.id === '24'))
     return (
         <>
             {loading && meals.length === 0 ? (
@@ -38,7 +47,7 @@ const MealsList: React.FC = () => {
             ) : (
                 <div className='grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-y-10 w-full gap-4'>
                     {meals.map((meal) => (
-                        <MealCard meal={meal} key={meal.createdAt} />
+                        <MealCard meal={meal} key={meal.id} deleteQuick={(id: string) => handleDelete(id)} />
                     ))}
                 </div >
             )}
@@ -59,7 +68,7 @@ const MealsList: React.FC = () => {
                     </div>
                     <Button styles='h-12 rounded-xl px-8 max-md:px-4'>
                         <BiPlus className='size-6' />
-                        <span className="">Load more</span>
+                        <span className="">Add meal</span>
                     </Button>
                 </div>
             }

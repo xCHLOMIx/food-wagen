@@ -4,11 +4,15 @@ import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { FaStar, FaTag } from 'react-icons/fa'
 import { IoMdMore } from 'react-icons/io'
 import SecondaryButton from './SecondaryButton'
+import { useDelete } from '@/hooks/useDelete'
+import { useRouter } from 'next/navigation'
 
-const MealCard: React.FC<{ meal: MealInterface }> = ({ meal }) => {
+const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => void }> = ({ meal, deleteQuick }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
   const [popUp, setPopUp] = useState<boolean>(false);
+  const { loading, deleteMeal, success } = useDelete()
+  const router = useRouter()
 
   useEffect(() => {
     const handleClickedOutside = (event: Event) => {
@@ -26,13 +30,13 @@ const MealCard: React.FC<{ meal: MealInterface }> = ({ meal }) => {
 
   return (
     <div className='w-full flex flex-col gap-6 items-start'>
-      <div className={`fixed left-0 z-50 ${popUp ? "flex" : "hidden"} justify-center pt-[132px] bg-[#C6C2C285] w-full h-screen top-0`}>
+      <div className={`fixed left-0 z-50 ${popUp && !success ? "flex" : "hidden"} px-4 justify-center pt-[132px] bg-[#C6C2C285] w-full h-screen top-0`}>
         <div className='bg-white w-full max-w-[564px] custom-shadow-2 rounded-[20px] h-max px-11 py-12 flex flex-col items-center'>
           <h1 className='text-tertiary text-[32px] font-bold'>Delete Meal</h1>
           <p className='text-[#9E9E9E] mt-3'>Are you sure you want to delete this meal? Actions cannot be reversed.</p>
           <div className='grid grid-cols-2 gap-3 w-full my-[18px]'>
-            <SecondaryButton styles='w-full p-3 text-sm rounded-xl text-center'>
-              <span className='text-center w-full font-bold'>Yes</span>
+            <SecondaryButton loading={loading} handleClick={() => { deleteMeal(meal.id); setTimeout(() => { setPopUp(false) }, 3000); deleteQuick(meal.id); }} styles='w-full p-3 text-sm rounded-xl text-center'>
+              <span className='text-center w-full font-bold'>{success ? "Deleted" : "Yes"}</span>
             </SecondaryButton>
             <button onClick={() => setPopUp(false)} className='food-outline-button text-sm w-full'>
               <span className='text-center w-full font-bold'>Cancel</span>
@@ -45,11 +49,11 @@ const MealCard: React.FC<{ meal: MealInterface }> = ({ meal }) => {
           <FaTag />
           <span>${meal.Price}</span>
         </div>
-        <Image src={meal.avatar} alt={meal.name} sizes='240px' fill className="object-cover" />
+        <Image src={meal.avatar} loading='eager' alt={meal.name} sizes='240px' fill className="object-cover" />
       </div>
       <div className='grid grid-cols-5 gap-4 w-full items-center'>
         <div className='size-13 rounded-lg overflow-hidden relative'>
-          <Image src={meal.logo} alt={meal.name} sizes='240px' fill className="object-cover" />
+          <Image src={meal.logo} loading='eager' alt={meal.name} sizes='240px' fill className="object-cover" />
         </div>
         <div className='w-full col-span-3'>
           <h6 className='font-bold truncate w-11/12 text-foreground'>{meal.name}</h6>
