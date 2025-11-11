@@ -4,6 +4,8 @@
   --color-primary: #F17228;
   --color-custom-green: #79B93C;
   --color-secondary: #FFB30E;
+  --color-tertiary: #FF9A0E;
+  --color-custom-orange: #FFBA26;
   --color-shadow: #FFAE004A;
   --color-shadow-2: #FFAE0042;
   --color-muted: #757575;
@@ -33,7 +35,11 @@
   box-shadow: 0px 20px 40px 0px var(--color-shadow);
 }
 
-.custom-shadow-2::after {
+.custom-shadow-2 {
+  box-shadow: 0px 2px 15px 0px #00000026;
+}
+
+.custom-shadow::after {
   position: absolute;
   left: 0;
   content: "";
@@ -59,8 +65,12 @@
   @apply cursor-pointer bg-linear-to-r from-[#FF7A7A] to-120% to-primary text-white font-semibold w-max p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
 }
 
+.food-outline-button {
+  @apply cursor-pointer outline bg-white outline-custom-orange text-black font-semibold p-1 px-8 max-md:px-4 rounded-lg flex items-center gap-2;
+}
+
 .food-secondary-button {
-  @apply cursor-pointer relative overflow-hidden bg-linear-to-r from-[#FFBA26] to-120% to-[#FF9A0E] text-white font-semibold w-max flex items-center gap-2;
+  @apply cursor-pointer relative overflow-hidden bg-linear-to-r from-custom-orange to-120% to-tertiary text-white font-semibold flex items-center gap-2;
 }
 
 /* Reponsive fonts */
