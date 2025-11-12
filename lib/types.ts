@@ -33,3 +33,8 @@ export interface LinkItemInterface {
     name: string,
     href: string
 }
+
+export interface OptionInterface {
+    name: string,
+    value: string
+}

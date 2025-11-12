@@ -1,18 +1,16 @@
 import { MealInterface } from '@/lib/types'
 import Image from 'next/image'
-import React, { ReactNode, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaStar, FaTag } from 'react-icons/fa'
 import { IoMdMore } from 'react-icons/io'
 import SecondaryButton from './SecondaryButton'
 import { useDelete } from '@/hooks/useDelete'
-import { useRouter } from 'next/navigation'
 
 const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => void }> = ({ meal, deleteQuick }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
   const [popUp, setPopUp] = useState<boolean>(false);
   const { loading, deleteMeal, success } = useDelete()
-  const router = useRouter()
 
   useEffect(() => {
     const handleClickedOutside = (event: Event) => {
@@ -32,8 +30,8 @@ const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => voi
     <div className='w-full flex flex-col gap-6 items-start'>
       <div className={`fixed left-0 z-50 ${popUp && !success ? "flex" : "hidden"} px-4 justify-center pt-[132px] bg-[#C6C2C285] w-full h-screen top-0`}>
         <div className='bg-white w-full max-w-[564px] custom-shadow-2 rounded-[20px] h-max px-11 py-12 flex flex-col items-center'>
-          <h1 className='text-tertiary text-[32px] font-bold'>Delete Meal</h1>
-          <p className='text-[#9E9E9E] mt-3'>Are you sure you want to delete this meal? Actions cannot be reversed.</p>
+          <h2 className='text-tertiary text-[32px] font-bold'>Delete Meal</h2>
+          <p className='text-placeholder mt-3'>Are you sure you want to delete this meal? Actions cannot be reversed.</p>
           <div className='grid grid-cols-2 gap-3 w-full my-[18px]'>
             <SecondaryButton loading={loading} handleClick={() => { deleteMeal(meal.id); setTimeout(() => { setPopUp(false) }, 3000); deleteQuick(meal.id); }} styles='w-full p-3 text-sm rounded-xl text-center'>
               <span className='text-center w-full font-bold'>{success ? "Deleted" : "Yes"}</span>
