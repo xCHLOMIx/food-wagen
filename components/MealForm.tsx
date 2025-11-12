@@ -29,7 +29,7 @@ const MealForm: React.FC<{ showForm: boolean, setShowForm: (res: boolean) => voi
 
         return () => document.removeEventListener("mousedown", handleClickedOutside)
     }, [])
-
+    
     return (
         <div className={`fixed top-0 z-50 left-0 py-[132px] ${showForm ? "flex" : "hidden"} food-no-scroll-bar justify-center bg-[#C6C2C285] w-full px-4 h-screen overflow-y-auto`}>
             <form onSubmit={async (e) => {
@@ -37,7 +37,7 @@ const MealForm: React.FC<{ showForm: boolean, setShowForm: (res: boolean) => voi
                 await handleSubmit({ meal: { id: "", name, Price: price, rating, avatar, open: status, logo } })
                 setTimeout(() => { setShowForm(false) }, 1000);
             }} className='bg-white custom-shadow-2 px-11 py-16 rounded-2xl w-full flex lg:px-32 flex-col items-center h-max max-w-[732px]'>
-                {error}
+                {error && <div className='pt-3 text-error'>{error}</div>}
                 <h1 className='text-tertiary text-[32px] font-bold'>Add a meal</h1>
                 <div className='flex flex-col gap-3 w-full'>
                     <div className='w-full mt-2'>
@@ -68,7 +68,7 @@ const MealForm: React.FC<{ showForm: boolean, setShowForm: (res: boolean) => voi
                     <div className='w-full mt-2'>
                         <label htmlFor="restaurant_status" className='sr-only'>Restaurant status</label>
                         <div ref={dropdownRef} onClick={() => setIsOpen(!isOpen)} className='food-input flex relative items-center justify-between cursor-pointer' id='restaurant_status'>
-                            <span className={`${status ? "text-black capitalize" : "text-placeholder"} `}>{status ? (status ? "Open" : "Closed") : "Restaurant status"}</span>
+                            <span className={`${status != null ? "text-black capitalize" : "text-placeholder"} `}>{status != null ? (status ? "Open" : "Closed") : "Restaurant status"}</span>
                             <RxCaretDown className={`${isOpen && "rotate-180"} transition duration-150 size-5`} />
                             <div className={`absolute z-50 ${isOpen ? "flex" : "hidden"} flex-col top-full mt-2 bg-white rounded-lg p-2 w-full left-0 border border-foreground-muted/50`}>
                                 {options.map((option) => (

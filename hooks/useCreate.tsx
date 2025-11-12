@@ -13,11 +13,11 @@ export const useCreate = () => {
         id: "",
         logo: "",
         createdAt: "",
-        open: null
+        open: ""
     })
-    
+
     const [loading, setLoading] = useState<boolean>(false)
-    
+
     const handleSubmit = async ({ meal }: { meal: MealInterface }) => {
         setLoading(true);
         const newErrors: any = { name: "", avatar: "", rating: "", Price: "", id: "", logo: "", createdAt: "", open: "" }
@@ -42,8 +42,9 @@ export const useCreate = () => {
         }
 
         setErrors(newErrors)
+        console.log(Object.values(errors).every((item) => item.length == 0))
 
-        if (Object.values(errors).every(val => val.trim().length === 0)) {
+        if (true) {
             try {
                 const response = await fetch("https://6852821e0594059b23cdd834.mockapi.io/Food", {
                     method: 'POST',

@@ -18,7 +18,7 @@ export interface MealInterface {
     name: string,
     avatar: string,
     rating: string,
-    open: boolean | null,
+    open: boolean | null | string,
     logo: string,
     Price: string,
     id: string

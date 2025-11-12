@@ -10,11 +10,12 @@ import Image from 'next/image'
 import { FaRegSadTear } from 'react-icons/fa'
 import { BiPlus } from 'react-icons/bi'
 import Button from './Button'
+import MealForm from './MealForm'
 
 const MealsList: React.FC<{ search: string }> = ({ search }) => {
     const [meals, setMeals] = useState<MealInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
-
+    const [showForm, setShowForm] = useState<boolean>(false)
 
     const fetchData = async () => {
         setLoading(true)
@@ -79,10 +80,11 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
                         <FaRegSadTear className='size-6' />
                         <p className='text-2xl'>No Meals found!</p>
                     </div>
-                    <Button styles='h-12 rounded-xl px-8 max-md:px-4'>
+                    <Button handleClick={() => setShowForm(true)} styles='h-12 rounded-xl px-8 max-md:px-4'>
                         <BiPlus className='size-6' />
                         <span className="">Add meal</span>
                     </Button>
+                    <MealForm showForm={showForm} setShowForm={setShowForm} />
                 </div>
             }
         </>
