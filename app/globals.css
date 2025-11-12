@@ -54,11 +54,11 @@
 }
 
 .food-hero-section {
-  @apply bg-secondary overflow-hidden max-xl:pt-48 min-h-[494px] px-6 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40;
+  @apply bg-secondary mt-16 overflow-hidden max-xl:pt-48 min-h-[494px] px-6 grid grid-cols-1 xl:grid-cols-5 gap-6 xl:gap-28 items-center xl:px-40;
 }
 
 .food-navbar {
-  @apply p-4 lg:px-40 bg-white flex items-center justify-between;
+  @apply p-4 lg:px-40 bg-white fixed w-full z-30 shadow top-0 flex items-center justify-between;
 }
 
 .food-button {
