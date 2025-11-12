@@ -1,7 +1,7 @@
 import { MealInterface } from "@/lib/types"
 import { useState } from "react"
 
-export const useCreate = () => {
+export const useEdit = () => {
     const [success, setSuccess] = useState<boolean>(false)
     const [error, setError] = useState<any>(null)
 
@@ -18,9 +18,9 @@ export const useCreate = () => {
 
     const [loading, setLoading] = useState<boolean>(false)
 
-    const handleSubmit = async ({ meal }: { meal: MealInterface }) => {
+    const handleSubmit = async ({ meal, id }: { meal: any, id?: string }) => {
         setLoading(true);
-        const newErrors: any = { name: "", avatar: "", rating: "", Price: "", id: "", logo: "", createdAt: "", open: "" }
+        const newErrors: any = { name: "", avatar: "", rating: "", Price: "", logo: "", createdAt: "", open: "" }
 
         if (meal.name.trim().length == 0) {
             newErrors.name = "Food name is required"
@@ -45,8 +45,8 @@ export const useCreate = () => {
 
         if (true) {
             try {
-                const response = await fetch("https://6852821e0594059b23cdd834.mockapi.io/Food", {
-                    method: 'POST',
+                const response = await fetch(`https://6852821e0594059b23cdd834.mockapi.io/Food/${id}`, {
+                    method: 'PUT',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(meal)
                 })

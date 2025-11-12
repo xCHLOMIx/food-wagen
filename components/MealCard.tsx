@@ -5,12 +5,15 @@ import { FaStar, FaTag } from 'react-icons/fa'
 import { IoMdMore } from 'react-icons/io'
 import SecondaryButton from './SecondaryButton'
 import { useDelete } from '@/hooks/useDelete'
+import MealForm from './MealForm'
 
 const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => void }> = ({ meal, deleteQuick }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
   const [popUp, setPopUp] = useState<boolean>(false);
-  const { loading, deleteMeal, success } = useDelete()
+  const { loading, deleteMeal, success } = useDelete();
+  const [showForm, setShowForm] = useState<boolean>(false)
+
 
   useEffect(() => {
     const handleClickedOutside = (event: Event) => {
@@ -73,7 +76,7 @@ const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => voi
         >
           <IoMdMore className='size-6' />
           <div ref={dropdownRef} className={`${isOpen ? "flex" : "hidden"} flex-col bg-white shadow rounded-xl p-2 mt-2 absolute z-40 right-0`}>
-            <div className='pl-2 pr-3 py-1 hover:bg-gray-100 transition duration-150 rounded-lg'>Edit</div>
+            <div onClick={() => setShowForm(true)} className='pl-2 pr-3 py-1 hover:bg-gray-100 transition duration-150 rounded-lg'>Edit</div>
             <div
               onClick={() => { setPopUp(true); setIsOpen(false) }}
               className='text-red-500 pl-2 pr-3 py-1 hover:bg-red-50 transition duration-150 rounded-lg'
@@ -82,6 +85,7 @@ const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => voi
             </div>
           </div>
         </div>
+        <MealForm showForm={showForm} initialMealId={meal.id} setShowForm={setShowForm} />
       </div>
       <div className={`text-lg font-bold px-3 p-1 rounded-xl ${meal.open ? "text-custom-green bg-custom-green/20" : "text-primary bg-primary/20"}`}>
         {meal.open ? "Open" : "Closed"}
