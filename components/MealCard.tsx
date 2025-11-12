@@ -33,7 +33,15 @@ const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => voi
           <h2 className='text-tertiary text-[32px] font-bold'>Delete Meal</h2>
           <p className='text-placeholder mt-3'>Are you sure you want to delete this meal? Actions cannot be reversed.</p>
           <div className='grid grid-cols-2 gap-3 w-full my-[18px]'>
-            <SecondaryButton loading={loading} handleClick={() => { deleteMeal(meal.id); setTimeout(() => { setPopUp(false) }, 3000); deleteQuick(meal.id); }} styles='w-full p-3 text-sm rounded-xl text-center'>
+            <SecondaryButton
+              loading={loading}
+              handleClick={async () => {
+                await deleteMeal(meal.id);
+                setTimeout(() => { setPopUp(false) }, 3000);
+                deleteQuick(meal.id);
+              }}
+              styles='w-full p-3 text-sm rounded-xl text-center'
+            >
               <span className='text-center w-full font-bold'>{success ? "Deleted" : "Yes"}</span>
             </SecondaryButton>
             <button onClick={() => setPopUp(false)} className='food-outline-button text-sm w-full'>

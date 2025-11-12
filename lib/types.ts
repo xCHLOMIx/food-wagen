@@ -14,11 +14,11 @@ export interface SelectorProps {
 }
 
 export interface MealInterface {
-    createdAt: string,
+    createdAt?: string,
     name: string,
     avatar: string,
     rating: string,
-    open: boolean,
+    open: boolean | null,
     logo: string,
     Price: string,
     id: string

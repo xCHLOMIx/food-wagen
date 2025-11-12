@@ -44,8 +44,6 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
         fetchData()
     }, [search])
 
-    console.log(meals)
-
     const handleDelete = (id: string) => {
         const newMeals: any = meals.filter((meal) => meal.id !== id)
         setMeals(newMeals)

@@ -1,9 +1,9 @@
 import { MealInterface } from "@/lib/types"
 import { useState } from "react"
 
-export const useCreate = ({ meal }: { meal: MealInterface }) => {
+export const useCreate = () => {
     const [success, setSuccess] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+    const [error, setError] = useState<any>(null)
 
     const [errors, setErrors] = useState<MealInterface>({
         name: "",
@@ -13,40 +13,44 @@ export const useCreate = ({ meal }: { meal: MealInterface }) => {
         id: "",
         logo: "",
         createdAt: "",
-        open: false
+        open: null
     })
-
+    
     const [loading, setLoading] = useState<boolean>(false)
+    
+    const handleSubmit = async ({ meal }: { meal: MealInterface }) => {
+        setLoading(true);
+        const newErrors: any = { name: "", avatar: "", rating: "", Price: "", id: "", logo: "", createdAt: "", open: "" }
 
-    const handleSubmit = async () => {
-        const newErrors: MealInterface = { name: "", avatar: "", rating: "", Price: "", id: "", logo: "", createdAt: "", open: false }
-        if (meal.name.length == 0) {
+        if (meal.name.trim().length == 0) {
             newErrors.name = "Food name is required"
         }
-        if (meal.avatar.length == 0) {
-            newErrors.name = "Food avatar is required"
+        if (meal.avatar.trim().length == 0) {
+            newErrors.avatar = "Food avatar is required"
         }
-        if (meal.rating.length == 0) {
-            newErrors.name = "Food rating is required"
+        if (meal.rating.trim().length == 0) {
+            newErrors.rating = "Food rating is required"
         }
-        if (meal.Price.length == 0) {
-            newErrors.name = "Food price is required"
+        if (meal.Price.trim().length == 0) {
+            newErrors.Price = "Food price is required"
         }
-        if (meal.logo.length == 0) {
-            newErrors.name = "Food logo is required"
+        if (meal.logo.trim().length == 0) {
+            newErrors.logo = "Food logo is required"
+        }
+        if (meal.open == null) {
+            newErrors.open = "Food status is required"
         }
 
         setErrors(newErrors)
 
-        if (!errors) {
-            setLoading(true);
+        if (Object.values(errors).every(val => val.trim().length === 0)) {
             try {
                 const response = await fetch("https://6852821e0594059b23cdd834.mockapi.io/Food", {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(meal)
                 })
-                
+
                 if (response.ok) {
                     setLoading(false);
                     setSuccess(true)
@@ -56,8 +60,10 @@ export const useCreate = ({ meal }: { meal: MealInterface }) => {
                 setLoading(false);
                 setError(err)
             }
+        } else {
+            setLoading(false);
         }
     }
 
-    return {error, errors, handleSubmit, loading}
+    return { error, errors, handleSubmit, loading }
 }
