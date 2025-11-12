@@ -19,24 +19,28 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
 
     const fetchData = async () => {
         setLoading(true)
-        let response;
+        try {
 
-        if (search?.length > 0) {
-            response = await fetch(`https://6852821e0594059b23cdd834.mockapi.io/Food?name=${search}`);
-        } else {
-            response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
-        }
+            let response;
+
+            if (search?.length > 0) {
+                response = await fetch(`https://6852821e0594059b23cdd834.mockapi.io/Food?name=${search}`, { cache: 'no-store' });
+            } else {
+                response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food', { cache: 'no-store' });
+            }
 
 
-        const data = await response.json();
-        if (response.status == 404) {
-            setMeals([])
+            const data = await response.json();
+            if (response.status == 404) {
+                setMeals([])
+                setLoading(false)
+            } else {
+                setMeals(data)
+                setLoading(false)
+            }
+        } catch (err) {
             setLoading(false)
-        } else {
-            setMeals(data)
-            setLoading(false)
         }
-
     }
 
     useEffect(() => {
@@ -50,6 +54,10 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
         setMeals(newMeals)
     }
 
+    const handleRefetch = async () => {
+        await fetchData()
+    }
+
     return (
         <>
             {loading && meals.length === 0 ? (
@@ -61,7 +69,7 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
             ) : (
                 <div className='grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-y-10 w-full gap-4'>
                     {meals?.map((meal) => (
-                        <MealCard meal={meal} key={meal.id} deleteQuick={(id: string) => handleDelete(id)} />
+                        <MealCard refetch={handleRefetch} meal={meal} key={meal.id} deleteQuick={(id: string) => handleDelete(id)} />
                     ))}
                 </div >
             )}
@@ -84,7 +92,7 @@ const MealsList: React.FC<{ search: string }> = ({ search }) => {
                         <BiPlus className='size-6' />
                         <span className="">Add meal</span>
                     </Button>
-                    <MealForm showForm={showForm} setShowForm={setShowForm} />
+                    <MealForm showForm={showForm} refetch={handleRefetch} setShowForm={setShowForm} />
                 </div>
             }
         </>

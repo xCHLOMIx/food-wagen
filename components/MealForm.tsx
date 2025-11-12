@@ -7,7 +7,7 @@ import { useCreate } from '@/hooks/useCreate'
 import { MealInterface } from '@/lib/types'
 import { useEdit } from '@/hooks/useEdit'
 
-const MealForm: React.FC<{ initialMealId?: string; showForm: boolean, setShowForm: (res: boolean) => void }> = ({ initialMealId, showForm, setShowForm }) => {
+const MealForm: React.FC<{ initialMealId?: string; showForm: boolean, refetch: () => void; setShowForm: (res: boolean) => void }> = ({ initialMealId, refetch, showForm, setShowForm }) => {
     const [initialMeal, setInitialMeal] = useState<MealInterface | any>()
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const dropdownRef: any = useRef(null);
@@ -57,6 +57,7 @@ const MealForm: React.FC<{ initialMealId?: string; showForm: boolean, setShowFor
                     await editHandleSubmit({ meal: { name, Price: price, rating, avatar, open: status, logo }, id: initialMeal?.id })
                     :
                     await handleSubmit({ meal: { id: "", name, Price: price, rating, avatar, open: status, logo } })
+                refetch()
                 setTimeout(() => { setShowForm(false) }, 500);
             }} className='bg-white custom-shadow-2 px-11 py-16 rounded-2xl w-full flex lg:px-32 flex-col items-center h-max max-w-[732px]'>
                 {error && <div className='pt-3 text-error'>{initialMeal ? editError : error}</div>}

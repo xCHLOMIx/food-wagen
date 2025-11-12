@@ -7,7 +7,7 @@ import SecondaryButton from './SecondaryButton'
 import { useDelete } from '@/hooks/useDelete'
 import MealForm from './MealForm'
 
-const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => void }> = ({ meal, deleteQuick }) => {
+const MealCard: React.FC<{ meal: MealInterface, refetch: () => void, deleteQuick: (id: string) => void }> = ({ meal, deleteQuick, refetch }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<any>(null);
   const [popUp, setPopUp] = useState<boolean>(false);
@@ -85,7 +85,7 @@ const MealCard: React.FC<{ meal: MealInterface, deleteQuick: (id: string) => voi
             </div>
           </div>
         </div>
-        <MealForm showForm={showForm} initialMealId={meal.id} setShowForm={setShowForm} />
+        <MealForm refetch={refetch} showForm={showForm} initialMealId={meal.id} setShowForm={setShowForm} />
       </div>
       <div className={`text-lg font-bold px-3 p-1 rounded-xl ${meal.open ? "text-custom-green bg-custom-green/20" : "text-primary bg-primary/20"}`}>
         {meal.open ? "Open" : "Closed"}

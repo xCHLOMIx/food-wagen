@@ -11,7 +11,7 @@ const Navbar = () => {
 
     return (
         <nav className='food-navbar'>
-            <MealForm showForm={showForm} setShowForm={(res: boolean) => setShowForm(res)} />
+            <MealForm showForm={showForm} refetch={() => {}} setShowForm={(res: boolean) => setShowForm(res)} />
             <div className='flex items-center gap-3'>
                 <Image src={logo} alt='Food Wagen Logo' className='size-6' />
                 <h2 className='text-2xl font-bold max-md:hidden'>
