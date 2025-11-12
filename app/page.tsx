@@ -3,7 +3,8 @@ import Image from "next/image";
 import plate from "@/public/image.png"
 import MealsList from "@/components/MealsList";
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<{ query: string }> }) {
+  const query = (await searchParams).query
 
   return (
     <main className="">
@@ -13,7 +14,7 @@ export default async function Home() {
             <h3 className="font-bold x7l">Are you starving?</h3>
             <p className="font-normal text-lg">Within a few clicks, find meals that are accessible near you</p>
           </div>
-          <SearchForm />
+          <SearchForm query={query} />
         </div>
         <div className="w-full max-w-96 xl:col-span-2 relative self-end place-self-center">
           <div className="absolute bg-black/15 blur-lg z-10 rounded-full h-[420px] right-0 top-10 w-[420px]"></div>
@@ -22,8 +23,8 @@ export default async function Home() {
         </div>
       </section>
       <section id="food-meal-section" className="p-5 py-14 gap-14 flex flex-col items-center overflow-hidden min-h-[494px] px-6 xl:px-40">
-        <h3 className="font-bold w-max text-4xl">Featured Meals</h3>
-        <MealsList />
+        <h3 className="font-bold text-center text-4xl">{query ? `Results for '${query}'` : "Featured Meals"}</h3>
+        <MealsList search={query} />
       </section>
     </main>
   );

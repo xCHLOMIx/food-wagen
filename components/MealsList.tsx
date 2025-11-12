@@ -11,31 +11,46 @@ import { FaRegSadTear } from 'react-icons/fa'
 import { BiPlus } from 'react-icons/bi'
 import Button from './Button'
 
-const MealsList: React.FC = () => {
+const MealsList: React.FC<{ search: string }> = ({ search }) => {
     const [meals, setMeals] = useState<MealInterface[]>([])
     const [loading, setLoading] = useState<boolean>(true)
 
+
     const fetchData = async () => {
         setLoading(true)
-        const response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
-        const data = await response.json();
+        let response;
 
-        setMeals(data)
-        setLoading(false)
+        if (search?.length > 0) {
+            response = await fetch(`https://6852821e0594059b23cdd834.mockapi.io/Food?name=${search}`);
+        } else {
+            response = await fetch('https://6852821e0594059b23cdd834.mockapi.io/Food');
+        }
+
+
+        const data = await response.json();
+        if (response.status == 404) {
+            setMeals([])
+            setLoading(false)
+        } else {
+            setMeals(data)
+            setLoading(false)
+        }
+
     }
 
     useEffect(() => {
         setLoading(true)
 
         fetchData()
-    }, [])
+    }, [search])
+
+    console.log(meals)
 
     const handleDelete = (id: string) => {
         const newMeals: any = meals.filter((meal) => meal.id !== id)
         setMeals(newMeals)
     }
 
-    console.log(meals.filter((meal) => meal.id === '24'))
     return (
         <>
             {loading && meals.length === 0 ? (
@@ -46,7 +61,7 @@ const MealsList: React.FC = () => {
                 </div >
             ) : (
                 <div className='grid grid-cols-1 md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-y-10 w-full gap-4'>
-                    {meals.map((meal) => (
+                    {meals?.map((meal) => (
                         <MealCard meal={meal} key={meal.id} deleteQuick={(id: string) => handleDelete(id)} />
                     ))}
                 </div >
